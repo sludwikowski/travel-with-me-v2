@@ -8,6 +8,7 @@ import {
   MenuItem,
   Tooltip,
   Badge,
+  Drawer,
   IconButton,
   Menu,
 } from '@mui/material';
@@ -31,6 +32,7 @@ import { handleAsyncAction } from '../handleAsyncAction';
 
 function Navbar() {
   const [anchorElUser, setAnchorElUser] = useState('');
+  const [drawerOpen, setDrawerOpen] = React.useState(false);
 
   const navigate = useNavigate();
   const onClickAdminPanel = React.useCallback(
@@ -101,42 +103,64 @@ function Navbar() {
         >
           <Typography variant="h6">Travels</Typography>
         </Box>
-        <Box
-          display="flex"
-          justifyContent="space-between"
-          columnGap="20px"
-          zIndex="2"
-        >
-          <IconButton sx={{ color: 'black' }}>
-            <SearchOutlined />
-          </IconButton>
-          <Tooltip title="Open menu" sx={{ pt: 15 }}>
-            <IconButton onClick={handleOpenUserMenu} sx={{ color: 'black' }}>
-              <PersonOutline />
-            </IconButton>
-          </Tooltip>
-          <Badge
-            badgeContent={cart.length}
-            color="secondary"
-            invisible={cart.length === 0}
-            sx={{
-              '& .MuiBadge-badge': {
-                right: 5,
-                top: 5,
-                padding: '0 4px',
-                height: '14px',
-                minWidth: '13px',
-              },
-            }}
+        {isUserLoggedIn ? (
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            columnGap="20px"
+            zIndex="2"
           >
             <IconButton
-              onClick={() => dispatch(setIsCartOpen({}))}
+              onClick={() => setDrawerOpen(true)}
               sx={{ color: 'black' }}
             >
-              <ShoppingBagOutlined />
+              <SearchOutlined />
             </IconButton>
-          </Badge>
-        </Box>
+            <Drawer
+              anchor="top"
+              open={drawerOpen}
+              onClose={() => setDrawerOpen(false)}
+            >
+              <Typography>Hello Drawer</Typography>
+            </Drawer>
+            <Tooltip title="Open menu" sx={{ pt: 15 }}>
+              <IconButton onClick={handleOpenUserMenu} sx={{ color: 'black' }}>
+                <PersonOutline />
+              </IconButton>
+            </Tooltip>
+            <Badge
+              badgeContent={cart.length}
+              color="secondary"
+              invisible={cart.length === 0}
+              sx={{
+                '& .MuiBadge-badge': {
+                  right: 5,
+                  top: 5,
+                  padding: '0 4px',
+                  height: '14px',
+                  minWidth: '13px',
+                },
+              }}
+            >
+              <IconButton
+                onClick={() => dispatch(setIsCartOpen({}))}
+                sx={{ color: 'black' }}
+              >
+                <ShoppingBagOutlined />
+              </IconButton>
+            </Badge>
+          </Box>
+        ) : (
+          <Box
+            sx={{ '&:hover': { cursor: 'pointer' } }}
+            color={shades.secondary[500]}
+            onClick={onClickLogin}
+          >
+            <Typography textAlign="center" variant="h6" color="secondary">
+              Login
+            </Typography>
+          </Box>
+        )}
       </Box>
       <Menu
         id="menu-appbar"
@@ -164,21 +188,16 @@ function Navbar() {
             </Typography>
           </MenuItem>
         ) : null}
+
         <MenuItem onClick={handleCloseUserMenu}>
           <Typography textAlign="center" variant="h6" onClick={onClickProfile}>
             Profile
           </Typography>
         </MenuItem>
         <MenuItem>
-          {!isUserLoggedIn ? (
-            <Typography textAlign="center" variant="h6" onClick={onClickLogin}>
-              Login
-            </Typography>
-          ) : (
-            <Typography textAlign="center" variant="h6" onClick={onClickLogOut}>
-              Logout
-            </Typography>
-          )}
+          <Typography textAlign="center" variant="h6" onClick={onClickLogOut}>
+            Logout
+          </Typography>
         </MenuItem>
       </Menu>
     </Box>
