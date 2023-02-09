@@ -9,7 +9,7 @@ import App from './App';
 import { store } from './app/store';
 
 import './main.css';
-import { UserContextProvider } from './contexts/UserContext';
+import { UserContextProvider } from './contexts/UserContext.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

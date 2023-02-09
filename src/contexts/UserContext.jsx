@@ -67,7 +67,7 @@ export function UserContextProvider(props) {
 
   const getUserData = React.useCallback(async () => {
     const user = await getUserDataAPICall();
-    const isAdmin = await isAdminAPICall(user.localId);
+    // const isAdmin = await isAdminAPICall(user.localId);
 
     setUser({
       id: user.localId,

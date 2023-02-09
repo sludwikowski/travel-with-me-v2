@@ -1,5 +1,3 @@
-import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken';
 
-export const decodeToken = (token) => {
-  return jwt.decode(token)
-}
+export const decodeToken = (token) => jwt.decode(token);

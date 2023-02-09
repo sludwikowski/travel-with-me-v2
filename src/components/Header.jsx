@@ -29,6 +29,7 @@ import { checkIfUserIsLoggedIn } from '../features/auth/checkIfUserIsLoggedIn';
 
 import { signOutWithFirebaseSDK } from '../firebase/firebaseConfig';
 import { handleAsyncAction } from '../handleAsyncAction';
+import DatePicker from './DatePicker';
 
 function Navbar() {
   const [anchorElUser, setAnchorElUser] = useState('');
@@ -121,7 +122,7 @@ function Navbar() {
               open={drawerOpen}
               onClose={() => setDrawerOpen(false)}
             >
-              <Typography>Hello Drawer</Typography>
+              <DatePicker />
             </Drawer>
             <Tooltip title="Open menu" sx={{ pt: 15 }}>
               <IconButton onClick={handleOpenUserMenu} sx={{ color: 'black' }}>

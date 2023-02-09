@@ -1,1 +1,1 @@
-export const ADMINS_KEY = 'admins'
+export const ADMINS_KEY = 'admins';
