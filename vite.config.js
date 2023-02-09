@@ -15,4 +15,12 @@ export default defineConfig({
     setupFiles: 'src/setupTests.ts',
     clearMocks: true,
   },
+  resolve: {
+    alias: {
+      process: 'process/browser',
+      stream: 'stream-browserify',
+      zlib: 'browserify-zlib',
+      util: 'util',
+    },
+  },
 });
